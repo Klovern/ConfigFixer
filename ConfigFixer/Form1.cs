@@ -59,17 +59,17 @@ namespace ConfigFixer
             if (_PROJECTSETTINGS.ContainsKey(_FOCUSEDPROJECT))
             {
                 int i = 0;
-                var checkedSettings = new List<int>();
+                var overriddenSettings = new List<int>();
                 foreach (var setting in _PROJECTSETTINGS[_FOCUSEDPROJECT])
                 {
                     checkedListBox2.Items.Add(setting.ConfigName);
                     if (setting.UseTest)
                     {
-                        checkedSettings.Add(i);
+                        overriddenSettings.Add(i);
                     }
                     i++;
                 }
-                foreach (var check in checkedSettings)
+                foreach (var check in overriddenSettings)
                 {
                     checkedListBox2.SetItemCheckState(check, CheckState.Checked);
                 }
@@ -87,7 +87,6 @@ namespace ConfigFixer
                 var appsettingsLocalConfigSettingKeys = appsettingsLocalConfig.Providers.SelectMany(x => x.GetChildKeys(new List<string>(), default)).Distinct().OrderBy(key => key);
 
                 int i = 0;
-                var checkedSettings = new List<int>();
                 var configSetting = new List<(string ConfigName, bool UseTest)>();
                 foreach (var settingKey in appsettingsConfig.Providers.SelectMany(x => x.GetChildKeys(new List<string>(), default)).Distinct().OrderBy(key => key))
                 {
