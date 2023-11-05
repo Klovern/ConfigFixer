@@ -25,19 +25,15 @@ namespace ConfigFixer
                 {
                     this.ProjectList.Items.Add(project.ProjectName);
                 }
-
                 return;
             }
+
             var projects = _PROJECTS.Where(project => project.ProjectName.Contains(dyn.Text, StringComparison.InvariantCultureIgnoreCase));
 
             foreach (var project in projects)
             {
                 this.ProjectList.Items.Add(project.ProjectName);
             }
-        }
-
-        private void CheckedListBox2_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
         }
 
         private void ProjectList_SelectedIndexChanged(object sender, EventArgs e)
@@ -86,7 +82,7 @@ namespace ConfigFixer
         }
 
 
-        private void button1_Click(object sender, EventArgs e)
+        private void SyncSolution_Click(object sender, EventArgs e)
         {
             ProjectList.Items.Clear();
             OpenFileDialog openFileDialog1 = new OpenFileDialog
@@ -133,7 +129,7 @@ namespace ConfigFixer
             }
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void SetAppSettingsLocal_Click(object sender, EventArgs e)
         {
             var path = @_PROJECTS.First(p => p.ProjectName == _FOCUSEDPROJECT).ProjectPath.Replace(_FOCUSEDPROJECT, "");
             var localAppsettingsFile = @path + "appsettings.local.json";
@@ -161,7 +157,7 @@ namespace ConfigFixer
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void ToggleAllSettingsButton_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < checkedListBox2.Items.Count; i++)
             {
@@ -169,7 +165,7 @@ namespace ConfigFixer
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void ResetAllSettings_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < checkedListBox2.Items.Count; i++)
             {

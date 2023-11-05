@@ -79,7 +79,7 @@
             BrowseRootFolder.TabIndex = 3;
             BrowseRootFolder.Text = "Set Root Folder";
             BrowseRootFolder.UseVisualStyleBackColor = true;
-            BrowseRootFolder.Click += button1_Click;
+            BrowseRootFolder.Click += SyncSolution_Click;
             // 
             // textBox1
             // 
@@ -99,7 +99,7 @@
             checkedListBox2.Size = new Size(222, 418);
             checkedListBox2.Sorted = true;
             checkedListBox2.TabIndex = 6;
-            checkedListBox2.ItemCheck += CheckedListBox2_ItemCheck;
+
             // 
             // button1
             // 
@@ -109,7 +109,7 @@
             button1.TabIndex = 7;
             button1.Text = "Set Local Json";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click_1;
+            button1.Click += SetAppSettingsLocal_Click;
             // 
             // Search
             // 
@@ -173,7 +173,7 @@
             button2.TabIndex = 14;
             button2.Text = "Toggle All";
             button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            button2.Click += ToggleAllSettingsButton_Click;
             // 
             // button3
             // 
@@ -183,7 +183,7 @@
             button3.TabIndex = 15;
             button3.Text = "Reset";
             button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
+            button3.Click += ResetAllSettings_Click;
             // 
             // Form1
             // 
