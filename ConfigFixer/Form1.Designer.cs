@@ -87,6 +87,7 @@
             // 
             // checkedListBox2
             // 
+            checkedListBox2.CheckOnClick = true;
             checkedListBox2.FormattingEnabled = true;
             checkedListBox2.Location = new Point(504, 102);
             checkedListBox2.Name = "checkedListBox2";

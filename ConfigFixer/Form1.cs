@@ -82,13 +82,26 @@ namespace ConfigFixer
             try
             {
                 var configSetting = new List<(string ConfigName, bool UseTest)>();
-                var path = @_PROJECTS.First(x => x.ProjectName == _FOCUSEDPROJECT).ProjectPath.Replace(_FOCUSEDPROJECT, "") + "appsettings.json"; ;
+                var path = @_PROJECTS.First(x => x.ProjectName == _FOCUSEDPROJECT).ProjectPath.Replace(_FOCUSEDPROJECT, "") + "appsettings.json";
                 var config = new ConfigurationBuilder().AddJsonFile(path).Build();
+
+                var path2 = @_PROJECTS.First(x => x.ProjectName == _FOCUSEDPROJECT).ProjectPath.Replace(_FOCUSEDPROJECT, "") + "appsettings.local.json";
+                var config2 = new ConfigurationBuilder().AddJsonFile(path2).Build();
+
+                var localConfigSettingKeys = config2.Providers.SelectMany(x => x.GetChildKeys(new List<string>(), default)).Distinct().OrderBy(key => key);
+                int i = 0;
 
                 foreach (var settingKey in config.Providers.SelectMany(x => x.GetChildKeys(new List<string>(), default)).Distinct().OrderBy(key => key))
                 {
                     checkedListBox2.Items.Add(settingKey);
-                    configSetting.Add(new(settingKey, false));
+
+                    if (localConfigSettingKeys.Contains(settingKey))
+                    {
+                        checkedListBox2.SetItemCheckState(i, CheckState.Checked);
+                    }
+
+                    configSetting.Add(new(settingKey, localConfigSettingKeys.Contains(settingKey)));
+                    i++;
                 }
 
                 _PROJECTSETTINGS.Add(_FOCUSEDPROJECT, configSetting);
