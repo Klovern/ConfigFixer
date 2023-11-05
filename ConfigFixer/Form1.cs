@@ -58,7 +58,6 @@ namespace ConfigFixer
 
             if (_PROJECTSETTINGS.ContainsKey(_FOCUSEDPROJECT))
             {
-
                 int i = 0;
                 var checkedSettings = new List<int>();
                 foreach (var setting in _PROJECTSETTINGS[_FOCUSEDPROJECT])
