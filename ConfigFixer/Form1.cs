@@ -2,13 +2,13 @@ using Microsoft.Extensions.Configuration;
 
 namespace ConfigFixer
 {
-    public partial class Form1 : Form
+    public partial class ConfigFixerForm : Form
     {
         private string _SOLUTIONPATH = string.Empty;
         private List<(string ProjectName, string ProjectPath)> _PROJECTS = new List<(string ProjectName, string ProjectPath)>();
         private string _FOCUSEDPROJECT = string.Empty;
 
-        public Form1()
+        public ConfigFixerForm()
         {
             InitializeComponent();
         }
@@ -161,6 +161,31 @@ namespace ConfigFixer
             {
                 this.ProjectSettingCheckedList.SetItemCheckState(i, CheckState.Unchecked);
             }
+        }
+
+        private void Appsettings_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ConfigFixerForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Search_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

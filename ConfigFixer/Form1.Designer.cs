@@ -1,6 +1,6 @@
 ﻿namespace ConfigFixer
 {
-    partial class Form1
+    partial class ConfigFixerForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfigFixerForm));
             ProjectList = new ListView();
             ProjectSearch = new TextBox();
             BrowseFolders = new FolderBrowserDialog();
@@ -38,7 +39,6 @@
             Search = new Label();
             label1 = new Label();
             Appsettings = new Label();
-            label2 = new Label();
             CurrentProjectLabel = new TextBox();
             label3 = new Label();
             button2 = new Button();
@@ -47,12 +47,15 @@
             // 
             // ProjectList
             // 
+            ProjectList.BackColor = SystemColors.Control;
+            ProjectList.BackgroundImageTiled = true;
+            ProjectList.BorderStyle = BorderStyle.FixedSingle;
             ProjectList.FullRowSelect = true;
             ProjectList.GridLines = true;
-            ProjectList.Location = new Point(70, 102);
+            ProjectList.Location = new Point(30, 128);
             ProjectList.MultiSelect = false;
             ProjectList.Name = "ProjectList";
-            ProjectList.Size = new Size(284, 513);
+            ProjectList.Size = new Size(284, 391);
             ProjectList.Sorting = SortOrder.Ascending;
             ProjectList.TabIndex = 0;
             ProjectList.UseCompatibleStateImageBehavior = false;
@@ -61,7 +64,9 @@
             // 
             // ProjectSearch
             // 
-            ProjectSearch.Location = new Point(70, 52);
+            ProjectSearch.BackColor = SystemColors.Control;
+            ProjectSearch.BorderStyle = BorderStyle.FixedSingle;
+            ProjectSearch.Location = new Point(30, 90);
             ProjectSearch.Name = "ProjectSearch";
             ProjectSearch.Size = new Size(284, 23);
             ProjectSearch.TabIndex = 2;
@@ -73,100 +78,103 @@
             // 
             // BrowseRootFolder
             // 
-            BrowseRootFolder.Location = new Point(452, 20);
+            BrowseRootFolder.BackColor = Color.Snow;
+            BrowseRootFolder.Location = new Point(29, 14);
             BrowseRootFolder.Name = "BrowseRootFolder";
-            BrowseRootFolder.Size = new Size(285, 23);
+            BrowseRootFolder.Size = new Size(285, 40);
             BrowseRootFolder.TabIndex = 3;
-            BrowseRootFolder.Text = "Get Root Solution Path";
-            BrowseRootFolder.UseVisualStyleBackColor = true;
+            BrowseRootFolder.Text = "Set Solution Root";
+            BrowseRootFolder.UseVisualStyleBackColor = false;
             BrowseRootFolder.Click += SyncSolution_Click;
             // 
             // RootPathLabel
             // 
+            RootPathLabel.BorderStyle = BorderStyle.FixedSingle;
             RootPathLabel.Enabled = false;
-            RootPathLabel.Location = new Point(452, 49);
+            RootPathLabel.Location = new Point(424, 94);
             RootPathLabel.Name = "RootPathLabel";
             RootPathLabel.ReadOnly = true;
-            RootPathLabel.Size = new Size(285, 23);
+            RootPathLabel.Size = new Size(292, 23);
             RootPathLabel.TabIndex = 4;
             // 
             // ProjectSettingCheckedList
             // 
+            ProjectSettingCheckedList.BackColor = SystemColors.Control;
+            ProjectSettingCheckedList.BorderStyle = BorderStyle.FixedSingle;
             ProjectSettingCheckedList.CheckOnClick = true;
             ProjectSettingCheckedList.FormattingEnabled = true;
-            ProjectSettingCheckedList.Location = new Point(515, 203);
+            ProjectSettingCheckedList.Location = new Point(458, 157);
             ProjectSettingCheckedList.Name = "ProjectSettingCheckedList";
-            ProjectSettingCheckedList.Size = new Size(222, 418);
+            ProjectSettingCheckedList.Size = new Size(258, 362);
             ProjectSettingCheckedList.Sorted = true;
             ProjectSettingCheckedList.TabIndex = 6;
             // 
             // button1
             // 
-            button1.Location = new Point(515, 97);
+            button1.BackColor = Color.Snow;
+            button1.Location = new Point(458, 14);
             button1.Name = "button1";
-            button1.Size = new Size(222, 25);
+            button1.Size = new Size(258, 40);
             button1.TabIndex = 7;
             button1.Text = "Set Local Json";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             button1.Click += SetAppSettingsLocal_Click;
             // 
             // Search
             // 
             Search.AutoSize = true;
-            Search.Location = new Point(19, 60);
+            Search.Location = new Point(29, 68);
             Search.Name = "Search";
-            Search.Size = new Size(45, 15);
+            Search.Size = new Size(93, 15);
             Search.TabIndex = 8;
-            Search.Text = "Search:";
+            Search.Text = "Search Projects";
+            Search.Click += Search_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(415, 52);
+            label1.BackColor = Color.Transparent;
+            label1.Location = new Point(332, 94);
             label1.Name = "label1";
-            label1.Size = new Size(35, 15);
+            label1.Size = new Size(86, 15);
             label1.TabIndex = 9;
-            label1.Text = "Root:";
+            label1.Text = "Solution Root:";
             // 
             // Appsettings
             // 
             Appsettings.AutoSize = true;
-            Appsettings.Location = new Point(436, 203);
+            Appsettings.BackColor = Color.Transparent;
+            Appsettings.Location = new Point(376, 157);
             Appsettings.Name = "Appsettings";
-            Appsettings.Size = new Size(70, 15);
+            Appsettings.Size = new Size(76, 15);
             Appsettings.TabIndex = 10;
-            Appsettings.Text = "Appsettings";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(12, 102);
-            label2.Name = "label2";
-            label2.Size = new Size(52, 15);
-            label2.TabIndex = 11;
-            label2.Text = "Projects:";
+            Appsettings.Text = "Appsettings:";
+            Appsettings.Click += Appsettings_Click;
             // 
             // CurrentProjectLabel
             // 
+            CurrentProjectLabel.BorderStyle = BorderStyle.FixedSingle;
             CurrentProjectLabel.Enabled = false;
-            CurrentProjectLabel.Location = new Point(515, 157);
+            CurrentProjectLabel.Location = new Point(458, 128);
             CurrentProjectLabel.Name = "CurrentProjectLabel";
             CurrentProjectLabel.ReadOnly = true;
-            CurrentProjectLabel.Size = new Size(222, 23);
+            CurrentProjectLabel.Size = new Size(258, 23);
             CurrentProjectLabel.TabIndex = 12;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(412, 157);
+            label3.BackColor = Color.Transparent;
+            label3.Location = new Point(350, 128);
             label3.Name = "label3";
-            label3.Size = new Size(94, 15);
+            label3.Size = new Size(102, 15);
             label3.TabIndex = 13;
             label3.Text = "Selected Project:";
+            label3.Click += label3_Click;
             // 
             // button2
             // 
-            button2.Location = new Point(515, 126);
+            button2.Location = new Point(458, 58);
             button2.Name = "button2";
             button2.Size = new Size(102, 25);
             button2.TabIndex = 14;
@@ -176,7 +184,7 @@
             // 
             // button3
             // 
-            button3.Location = new Point(635, 126);
+            button3.Location = new Point(614, 58);
             button3.Name = "button3";
             button3.Size = new Size(102, 25);
             button3.TabIndex = 15;
@@ -184,16 +192,18 @@
             button3.UseVisualStyleBackColor = true;
             button3.Click += ResetAllSettings_Click;
             // 
-            // Form1
+            // ConfigFixerForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(793, 628);
+            BackColor = Color.Silver;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Zoom;
+            ClientSize = new Size(789, 655);
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(label3);
             Controls.Add(CurrentProjectLabel);
-            Controls.Add(label2);
             Controls.Add(Appsettings);
             Controls.Add(label1);
             Controls.Add(Search);
@@ -203,8 +213,14 @@
             Controls.Add(BrowseRootFolder);
             Controls.Add(ProjectSearch);
             Controls.Add(ProjectList);
-            Name = "Form1";
+            DoubleBuffered = true;
+            Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            ForeColor = SystemColors.ActiveCaptionText;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Name = "ConfigFixerForm";
             Text = "ConfigFixer";
+            Load += ConfigFixerForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -222,7 +238,6 @@
         private Label Search;
         private Label label1;
         private Label Appsettings;
-        private Label label2;
         private DialogResult dialogueResult;
         private TextBox CurrentProjectLabel;
         private Label label3;
