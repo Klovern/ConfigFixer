@@ -41,6 +41,8 @@
             label2 = new Label();
             textBox2 = new TextBox();
             label3 = new Label();
+            button2 = new Button();
+            button3 = new Button();
             SuspendLayout();
             // 
             // ProjectList
@@ -99,7 +101,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(515, 126);
+            button1.Location = new Point(515, 97);
             button1.Name = "button1";
             button1.Size = new Size(222, 25);
             button1.TabIndex = 7;
@@ -161,11 +163,33 @@
             label3.TabIndex = 13;
             label3.Text = "Selected Project:";
             // 
+            // button2
+            // 
+            button2.Location = new Point(515, 126);
+            button2.Name = "button2";
+            button2.Size = new Size(102, 25);
+            button2.TabIndex = 14;
+            button2.Text = "Toggle All";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(635, 126);
+            button3.Name = "button3";
+            button3.Size = new Size(102, 25);
+            button3.TabIndex = 15;
+            button3.Text = "Reset";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(793, 628);
+            Controls.Add(button3);
+            Controls.Add(button2);
             Controls.Add(label3);
             Controls.Add(textBox2);
             Controls.Add(label2);
@@ -201,5 +225,7 @@
         private DialogResult dialogueResult;
         private TextBox textBox2;
         private Label label3;
+        private Button button2;
+        private Button button3;
     }
 }

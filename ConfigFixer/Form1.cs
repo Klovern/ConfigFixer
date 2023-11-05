@@ -186,6 +186,32 @@ namespace ConfigFixer
                 sw.Write("}");
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            _PROJECTSETTINGS.Remove(_FOCUSEDPROJECT);
+            var configSetting = new List<(string ConfigName, bool UseTest)>();
+            for (int i = 0;i < checkedListBox2.Items.Count; i++)
+            {
+                var setting = (string)checkedListBox2.Items[i];
+                configSetting.Add((setting, true));
+                checkedListBox2.SetItemCheckState(i, CheckState.Checked);
+            }
+            _PROJECTSETTINGS.Add(_FOCUSEDPROJECT, configSetting);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            _PROJECTSETTINGS.Remove(_FOCUSEDPROJECT);
+            var configSetting = new List<(string ConfigName, bool UseTest)>();
+            for (int i = 0; i < checkedListBox2.Items.Count; i++)
+            {
+                var setting = (string)checkedListBox2.Items[i];
+                configSetting.Add((setting, false));
+                checkedListBox2.SetItemCheckState(i, CheckState.Unchecked);
+            }
+            _PROJECTSETTINGS.Add(_FOCUSEDPROJECT, configSetting);
+        }
     }
 }
 
