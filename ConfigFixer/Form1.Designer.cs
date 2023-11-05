@@ -32,7 +32,7 @@
             ProjectSearch = new TextBox();
             BrowseFolders = new FolderBrowserDialog();
             BrowseRootFolder = new Button();
-            RootBathLabel = new TextBox();
+            RootPathLabel = new TextBox();
             ProjectSettingCheckedList = new CheckedListBox();
             button1 = new Button();
             Search = new Label();
@@ -83,12 +83,12 @@
             // 
             // textBox1
             // 
-            RootBathLabel.Enabled = false;
-            RootBathLabel.Location = new Point(452, 49);
-            RootBathLabel.Name = "textBox1";
-            RootBathLabel.ReadOnly = true;
-            RootBathLabel.Size = new Size(285, 23);
-            RootBathLabel.TabIndex = 4;
+            RootPathLabel.Enabled = false;
+            RootPathLabel.Location = new Point(452, 49);
+            RootPathLabel.Name = "textBox1";
+            RootPathLabel.ReadOnly = true;
+            RootPathLabel.Size = new Size(285, 23);
+            RootPathLabel.TabIndex = 4;
             // 
             // checkedListBox2
             // 
@@ -200,7 +200,7 @@
             Controls.Add(Search);
             Controls.Add(button1);
             Controls.Add(ProjectSettingCheckedList);
-            Controls.Add(RootBathLabel);
+            Controls.Add(RootPathLabel);
             Controls.Add(BrowseRootFolder);
             Controls.Add(ProjectSearch);
             Controls.Add(ProjectList);
@@ -217,7 +217,7 @@
         private TextBox ProjectSearch;
         private FolderBrowserDialog BrowseFolders;
         private Button BrowseRootFolder;
-        private TextBox RootBathLabel;
+        private TextBox RootPathLabel;
         private CheckedListBox ProjectSettingCheckedList;
         private Button button1;
         private Label Search;

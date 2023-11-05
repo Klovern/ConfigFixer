@@ -120,7 +120,7 @@ namespace ConfigFixer
                 }
 
                 _PROJECTS = projectInformations;
-                RootBathLabel.Text = _SOLUTIONPATH;
+                RootPathLabel.Text = _SOLUTIONPATH;
             }
         }
 
