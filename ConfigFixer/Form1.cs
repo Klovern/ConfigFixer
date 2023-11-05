@@ -4,7 +4,6 @@ namespace ConfigFixer
 {
     public partial class Form1 : Form
     {
-
         private string _SOLUTIONPATH = string.Empty;
         private List<(string ProjectName, string ProjectPath)> _PROJECTS = new List<(string ProjectName, string ProjectPath)>();
         private string _FOCUSEDPROJECT = string.Empty;
@@ -38,7 +37,7 @@ namespace ConfigFixer
 
         private void ProjectList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            checkedListBox2.Items.Clear();
+            ProjectSettingCheckedList.Items.Clear();
 
             _FOCUSEDPROJECT = ProjectList?.FocusedItem?.Text.ToString() ?? string.Empty;
 
@@ -47,7 +46,7 @@ namespace ConfigFixer
                 return;
             }
 
-            this.textBox2.Text = _FOCUSEDPROJECT;
+            this.CurrentProjectLabel.Text = _FOCUSEDPROJECT;
 
             try
             {
@@ -59,19 +58,15 @@ namespace ConfigFixer
                 var appsettingsLocalConfig = appsettingsLocalFileExists ? new ConfigurationBuilder().AddJsonFile(appsettingsLocalPath).Build() : new ConfigurationBuilder().Build();
                 var appsettingsLocalConfigSettingKeys = appsettingsLocalConfig.Providers.SelectMany(configurationProvider => configurationProvider.GetChildKeys(new List<string>(), default)).Distinct().OrderBy(key => key);
 
-                int i = 0;
-                var configSetting = new List<(string ConfigName, bool UseTest)>();
+                int i = 0;             
                 foreach (var settingKey in appsettingsConfig.Providers.SelectMany(configurationProvider => configurationProvider.GetChildKeys(new List<string>(), default)).Distinct().OrderBy(key => key))
                 {
-                    checkedListBox2.Items.Add(settingKey);
+                    ProjectSettingCheckedList.Items.Add(settingKey);
 
                     if (appsettingsLocalConfigSettingKeys.Contains(settingKey))
                     {
-                        checkedListBox2.SetItemCheckState(i, CheckState.Checked);
+                        ProjectSettingCheckedList.SetItemCheckState(i, CheckState.Checked);
                     }
-
-                    configSetting.Add(new(settingKey, appsettingsLocalConfigSettingKeys.Contains(settingKey)));
-
                     i++;
                 }
             }
@@ -88,12 +83,12 @@ namespace ConfigFixer
             OpenFileDialog openFileDialog1 = new OpenFileDialog
             {
                 InitialDirectory = @"C:\",
-                Title = "Browse Text Files",
+                Title = "Browse Solution File",
 
                 CheckFileExists = true,
                 CheckPathExists = true,
 
-                DefaultExt = "txt",
+                DefaultExt = "sln",
                 Filter = "solution files (*.sln)|*.sln",
                 FilterIndex = 2,
                 RestoreDirectory = true,
@@ -125,7 +120,7 @@ namespace ConfigFixer
                 }
 
                 _PROJECTS = projectInformations;
-                textBox1.Text = _SOLUTIONPATH;
+                RootBathLabel.Text = _SOLUTIONPATH;
             }
         }
 
@@ -140,15 +135,15 @@ namespace ConfigFixer
             {
                 sw.Write("{");
 
-                for (int i = 0; i < checkedListBox2.CheckedItems.Count; i++)
+                for (int i = 0; i < ProjectSettingCheckedList.CheckedItems.Count; i++)
                 {
-                    var setting = (string)checkedListBox2.CheckedItems[i]!;
+                    var setting = (string)ProjectSettingCheckedList.CheckedItems[i]!;
                     var testsettingsSubstringedBeginning = testSettingsReference.Substring(testSettingsReference.IndexOf("@@" + setting)).Substring(setting.Length + 2);
                     var testsettingsSubstringedBeginningAndEnd = testsettingsSubstringedBeginning.Substring(0, testsettingsSubstringedBeginning.IndexOf("@@@"));
 
                     sw.Write(testsettingsSubstringedBeginningAndEnd);
 
-                    if (checkedListBox2.CheckedItems.Count != i + 1)
+                    if (ProjectSettingCheckedList.CheckedItems.Count != i + 1)
                     {
                         sw.Write("  ,");
                     }
@@ -159,17 +154,17 @@ namespace ConfigFixer
 
         private void ToggleAllSettingsButton_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < checkedListBox2.Items.Count; i++)
+            for (int i = 0; i < ProjectSettingCheckedList.Items.Count; i++)
             {
-                checkedListBox2.SetItemCheckState(i, CheckState.Checked);
+                ProjectSettingCheckedList.SetItemCheckState(i, CheckState.Checked);
             }
         }
 
         private void ResetAllSettings_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < checkedListBox2.Items.Count; i++)
+            for (int i = 0; i < ProjectSettingCheckedList.Items.Count; i++)
             {
-                checkedListBox2.SetItemCheckState(i, CheckState.Unchecked);
+                ProjectSettingCheckedList.SetItemCheckState(i, CheckState.Unchecked);
             }
         }
     }

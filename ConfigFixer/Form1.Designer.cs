@@ -32,14 +32,14 @@
             ProjectSearch = new TextBox();
             BrowseFolders = new FolderBrowserDialog();
             BrowseRootFolder = new Button();
-            textBox1 = new TextBox();
-            checkedListBox2 = new CheckedListBox();
+            RootBathLabel = new TextBox();
+            ProjectSettingCheckedList = new CheckedListBox();
             button1 = new Button();
             Search = new Label();
             label1 = new Label();
             Appsettings = new Label();
             label2 = new Label();
-            textBox2 = new TextBox();
+            CurrentProjectLabel = new TextBox();
             label3 = new Label();
             button2 = new Button();
             button3 = new Button();
@@ -83,22 +83,22 @@
             // 
             // textBox1
             // 
-            textBox1.Enabled = false;
-            textBox1.Location = new Point(452, 49);
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.Size = new Size(285, 23);
-            textBox1.TabIndex = 4;
+            RootBathLabel.Enabled = false;
+            RootBathLabel.Location = new Point(452, 49);
+            RootBathLabel.Name = "textBox1";
+            RootBathLabel.ReadOnly = true;
+            RootBathLabel.Size = new Size(285, 23);
+            RootBathLabel.TabIndex = 4;
             // 
             // checkedListBox2
             // 
-            checkedListBox2.CheckOnClick = true;
-            checkedListBox2.FormattingEnabled = true;
-            checkedListBox2.Location = new Point(515, 203);
-            checkedListBox2.Name = "checkedListBox2";
-            checkedListBox2.Size = new Size(222, 418);
-            checkedListBox2.Sorted = true;
-            checkedListBox2.TabIndex = 6;
+            ProjectSettingCheckedList.CheckOnClick = true;
+            ProjectSettingCheckedList.FormattingEnabled = true;
+            ProjectSettingCheckedList.Location = new Point(515, 203);
+            ProjectSettingCheckedList.Name = "checkedListBox2";
+            ProjectSettingCheckedList.Size = new Size(222, 418);
+            ProjectSettingCheckedList.Sorted = true;
+            ProjectSettingCheckedList.TabIndex = 6;
 
             // 
             // button1
@@ -149,12 +149,12 @@
             // 
             // textBox2
             // 
-            textBox2.Enabled = false;
-            textBox2.Location = new Point(515, 157);
-            textBox2.Name = "textBox2";
-            textBox2.ReadOnly = true;
-            textBox2.Size = new Size(222, 23);
-            textBox2.TabIndex = 12;
+            CurrentProjectLabel.Enabled = false;
+            CurrentProjectLabel.Location = new Point(515, 157);
+            CurrentProjectLabel.Name = "textBox2";
+            CurrentProjectLabel.ReadOnly = true;
+            CurrentProjectLabel.Size = new Size(222, 23);
+            CurrentProjectLabel.TabIndex = 12;
             // 
             // label3
             // 
@@ -193,14 +193,14 @@
             Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(label3);
-            Controls.Add(textBox2);
+            Controls.Add(CurrentProjectLabel);
             Controls.Add(label2);
             Controls.Add(Appsettings);
             Controls.Add(label1);
             Controls.Add(Search);
             Controls.Add(button1);
-            Controls.Add(checkedListBox2);
-            Controls.Add(textBox1);
+            Controls.Add(ProjectSettingCheckedList);
+            Controls.Add(RootBathLabel);
             Controls.Add(BrowseRootFolder);
             Controls.Add(ProjectSearch);
             Controls.Add(ProjectList);
@@ -217,15 +217,15 @@
         private TextBox ProjectSearch;
         private FolderBrowserDialog BrowseFolders;
         private Button BrowseRootFolder;
-        private TextBox textBox1;
-        private CheckedListBox checkedListBox2;
+        private TextBox RootBathLabel;
+        private CheckedListBox ProjectSettingCheckedList;
         private Button button1;
         private Label Search;
         private Label label1;
         private Label Appsettings;
         private Label label2;
         private DialogResult dialogueResult;
-        private TextBox textBox2;
+        private TextBox CurrentProjectLabel;
         private Label label3;
         private Button button2;
         private Button button3;
