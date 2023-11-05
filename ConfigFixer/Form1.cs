@@ -50,8 +50,8 @@ namespace ConfigFixer
 
             try
             {
-                var appsettingsPath = @_PROJECTS.First(p => p.ProjectName == _FOCUSEDPROJECT).ProjectPath.Replace(_FOCUSEDPROJECT, "") + "appsettings.json";
-                var appsettingsLocalPath = @_PROJECTS.First(p => p.ProjectName == _FOCUSEDPROJECT).ProjectPath.Replace(_FOCUSEDPROJECT, "") + "appsettings.local.json";
+                var appsettingsPath = @_PROJECTS.First(p => p.ProjectName == _FOCUSEDPROJECT).ProjectPath + "\\appsettings.json";
+                var appsettingsLocalPath = @_PROJECTS.First(p => p.ProjectName == _FOCUSEDPROJECT).ProjectPath + "\\appsettings.local.json";
 
                 var appsettingsConfig = new ConfigurationBuilder().AddJsonFile(appsettingsPath).Build();
                 var appsettingsLocalFileExists = File.Exists(appsettingsLocalPath);
@@ -110,7 +110,9 @@ namespace ConfigFixer
                 {
                     var last = csprojPath.LastIndexOf("\\") + 1;
                     var projectName = csprojPath.Substring(last);
-                    projectInformations.Add(new() { ProjectName = projectName, ProjectPath = csprojPath });
+
+                    FileInfo csProjFile = new FileInfo(csprojPath);
+                    projectInformations.Add(new() { ProjectName = projectName, ProjectPath = csProjFile.DirectoryName! });
                 }
 
                 foreach (var projectInformation in projectInformations)
@@ -125,7 +127,7 @@ namespace ConfigFixer
 
         private void SetAppSettingsLocal_Click(object sender, EventArgs e)
         {
-            var localAppsettingsFile = @_PROJECTS.First(p => p.ProjectName == _FOCUSEDPROJECT).ProjectPath.Replace(_FOCUSEDPROJECT, "") + "appsettings.local.json";
+            var localAppsettingsFile = @_PROJECTS.First(p => p.ProjectName == _FOCUSEDPROJECT).ProjectPath + "\\appsettings.local.json";
 
             var testSettingsReference = File.ReadAllText("testsettings.txt");
 
