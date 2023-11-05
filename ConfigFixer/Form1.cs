@@ -56,6 +56,8 @@ namespace ConfigFixer
                 return;
             }
 
+            this.textBox2.Text = _FOCUSEDPROJECT;
+
             if (_PROJECTSETTINGS.ContainsKey(_FOCUSEDPROJECT))
             {
                 int i = 0;
