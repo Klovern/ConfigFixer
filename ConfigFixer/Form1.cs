@@ -125,8 +125,7 @@ namespace ConfigFixer
 
         private void SetAppSettingsLocal_Click(object sender, EventArgs e)
         {
-            var path = @_PROJECTS.First(p => p.ProjectName == _FOCUSEDPROJECT).ProjectPath.Replace(_FOCUSEDPROJECT, "");
-            var localAppsettingsFile = @path + "appsettings.local.json";
+            var localAppsettingsFile = @_PROJECTS.First(p => p.ProjectName == _FOCUSEDPROJECT).ProjectPath.Replace(_FOCUSEDPROJECT, "") + "appsettings.local.json";
 
             var testSettingsReference = File.ReadAllText("testsettings.txt");
 
