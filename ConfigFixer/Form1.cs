@@ -1,5 +1,4 @@
 using Microsoft.Extensions.Configuration;
-using System.Windows.Forms;
 
 namespace ConfigFixer
 {
@@ -62,7 +61,6 @@ namespace ConfigFixer
 
                 int i = 0;
                 var checkedSettings = new List<int>();
-
                 foreach (var setting in _PROJECTSETTINGS[_FOCUSEDPROJECT])
                 {
                     checkedListBox2.Items.Add(setting.ConfigName);
@@ -81,29 +79,30 @@ namespace ConfigFixer
 
             try
             {
-                var configSetting = new List<(string ConfigName, bool UseTest)>();
-                var path = @_PROJECTS.First(x => x.ProjectName == _FOCUSEDPROJECT).ProjectPath.Replace(_FOCUSEDPROJECT, "") + "appsettings.json";
-                var config = new ConfigurationBuilder().AddJsonFile(path).Build();
+                var appsettingsPath = @_PROJECTS.First(x => x.ProjectName == _FOCUSEDPROJECT).ProjectPath.Replace(_FOCUSEDPROJECT, "") + "appsettings.json";
+                var appsettingsLocalPath = @_PROJECTS.First(x => x.ProjectName == _FOCUSEDPROJECT).ProjectPath.Replace(_FOCUSEDPROJECT, "") + "appsettings.local.json";
 
-                var path2 = @_PROJECTS.First(x => x.ProjectName == _FOCUSEDPROJECT).ProjectPath.Replace(_FOCUSEDPROJECT, "") + "appsettings.local.json";
-                var config2 = new ConfigurationBuilder().AddJsonFile(path2).Build();
+                var appsettingsConfig = new ConfigurationBuilder().AddJsonFile(appsettingsPath).Build();
+                var appsettingsLocalFileExists = File.Exists(appsettingsLocalPath);
+                var appsettingsLocalConfig = appsettingsLocalFileExists ? new ConfigurationBuilder().AddJsonFile(appsettingsLocalPath).Build() : new ConfigurationBuilder().Build();
+                var appsettingsLocalConfigSettingKeys = appsettingsLocalConfig.Providers.SelectMany(x => x.GetChildKeys(new List<string>(), default)).Distinct().OrderBy(key => key);
 
-                var localConfigSettingKeys = config2.Providers.SelectMany(x => x.GetChildKeys(new List<string>(), default)).Distinct().OrderBy(key => key);
                 int i = 0;
-
-                foreach (var settingKey in config.Providers.SelectMany(x => x.GetChildKeys(new List<string>(), default)).Distinct().OrderBy(key => key))
+                var checkedSettings = new List<int>();
+                var configSetting = new List<(string ConfigName, bool UseTest)>();
+                foreach (var settingKey in appsettingsConfig.Providers.SelectMany(x => x.GetChildKeys(new List<string>(), default)).Distinct().OrderBy(key => key))
                 {
                     checkedListBox2.Items.Add(settingKey);
 
-                    if (localConfigSettingKeys.Contains(settingKey))
+                    if (appsettingsLocalConfigSettingKeys.Contains(settingKey))
                     {
                         checkedListBox2.SetItemCheckState(i, CheckState.Checked);
                     }
 
-                    configSetting.Add(new(settingKey, localConfigSettingKeys.Contains(settingKey)));
+                    configSetting.Add(new(settingKey, appsettingsLocalConfigSettingKeys.Contains(settingKey)));
+
                     i++;
                 }
-
                 _PROJECTSETTINGS.Add(_FOCUSEDPROJECT, configSetting);
             }
             catch (Exception ex)
@@ -139,8 +138,6 @@ namespace ConfigFixer
 
                 FileInfo fileInfo = new FileInfo(openFileDialog1.FileName);
                 _PATH = fileInfo.DirectoryName!;
-
-                this.ProjectList.Clear();
 
                 var csProjFilePaths = Directory.EnumerateFiles(_PATH, "*.csproj*", SearchOption.AllDirectories).Where(file => file.EndsWith(".csproj"));
                 var projectInformations = new List<(string ProjectName, string ProjectPath)>();
