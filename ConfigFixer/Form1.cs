@@ -133,7 +133,7 @@ namespace ConfigFixer
 
             using (StreamWriter sw = new StreamWriter(localAppsettingsFile))
             {
-                sw.Write("{");
+                sw.WriteLine("{");
 
                 for (int i = 0; i < ProjectSettingCheckedList.CheckedItems.Count; i++)
                 {
@@ -141,14 +141,9 @@ namespace ConfigFixer
                     var testsettingsSubstringedBeginning = testSettingsReference.Substring(testSettingsReference.IndexOf("@@" + setting)).Substring(setting.Length + 2);
                     var testsettingsSubstringedBeginningAndEnd = testsettingsSubstringedBeginning.Substring(0, testsettingsSubstringedBeginning.IndexOf("@@@"));
 
-                    sw.Write(testsettingsSubstringedBeginningAndEnd);
-
-                    if (ProjectSettingCheckedList.CheckedItems.Count != i + 1)
-                    {
-                        sw.Write("  ,");
-                    }
+                    sw.WriteLine(testsettingsSubstringedBeginningAndEnd.Trim() + (ProjectSettingCheckedList.CheckedItems.Count != i + 1 ? "," : string.Empty));
                 }
-                sw.Write("}");
+                sw.WriteLine("}");
             }
         }
 
