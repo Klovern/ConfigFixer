@@ -77,29 +77,28 @@
             BrowseRootFolder.Name = "BrowseRootFolder";
             BrowseRootFolder.Size = new Size(285, 23);
             BrowseRootFolder.TabIndex = 3;
-            BrowseRootFolder.Text = "Set Root Folder";
+            BrowseRootFolder.Text = "Get Root Solution Path";
             BrowseRootFolder.UseVisualStyleBackColor = true;
             BrowseRootFolder.Click += SyncSolution_Click;
             // 
-            // textBox1
+            // RootPathLabel
             // 
             RootPathLabel.Enabled = false;
             RootPathLabel.Location = new Point(452, 49);
-            RootPathLabel.Name = "textBox1";
+            RootPathLabel.Name = "RootPathLabel";
             RootPathLabel.ReadOnly = true;
             RootPathLabel.Size = new Size(285, 23);
             RootPathLabel.TabIndex = 4;
             // 
-            // checkedListBox2
+            // ProjectSettingCheckedList
             // 
             ProjectSettingCheckedList.CheckOnClick = true;
             ProjectSettingCheckedList.FormattingEnabled = true;
             ProjectSettingCheckedList.Location = new Point(515, 203);
-            ProjectSettingCheckedList.Name = "checkedListBox2";
+            ProjectSettingCheckedList.Name = "ProjectSettingCheckedList";
             ProjectSettingCheckedList.Size = new Size(222, 418);
             ProjectSettingCheckedList.Sorted = true;
             ProjectSettingCheckedList.TabIndex = 6;
-
             // 
             // button1
             // 
@@ -147,11 +146,11 @@
             label2.TabIndex = 11;
             label2.Text = "Projects:";
             // 
-            // textBox2
+            // CurrentProjectLabel
             // 
             CurrentProjectLabel.Enabled = false;
             CurrentProjectLabel.Location = new Point(515, 157);
-            CurrentProjectLabel.Name = "textBox2";
+            CurrentProjectLabel.Name = "CurrentProjectLabel";
             CurrentProjectLabel.ReadOnly = true;
             CurrentProjectLabel.Size = new Size(222, 23);
             CurrentProjectLabel.TabIndex = 12;
