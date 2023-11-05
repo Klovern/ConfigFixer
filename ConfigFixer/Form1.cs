@@ -5,7 +5,7 @@ namespace ConfigFixer
     public partial class Form1 : Form
     {
 
-        private string _PATH = string.Empty;
+        private string _SOLUTIONPATH = string.Empty;
         private List<(string ProjectName, string ProjectPath)> _PROJECTS = new List<(string ProjectName, string ProjectPath)>();
         private string _FOCUSEDPROJECT = string.Empty;
 
@@ -111,9 +111,9 @@ namespace ConfigFixer
             {
 
                 FileInfo fileInfo = new FileInfo(openFileDialog1.FileName);
-                _PATH = fileInfo.DirectoryName!;
+                _SOLUTIONPATH = fileInfo.DirectoryName!;
 
-                var csProjFilePaths = Directory.EnumerateFiles(_PATH, "*.csproj*", SearchOption.AllDirectories).Where(file => file.EndsWith(".csproj"));
+                var csProjFilePaths = Directory.EnumerateFiles(_SOLUTIONPATH, "*.csproj*", SearchOption.AllDirectories).Where(file => file.EndsWith(".csproj"));
                 var projectInformations = new List<(string ProjectName, string ProjectPath)>();
 
                 foreach (var csprojPath in csProjFilePaths)
@@ -129,7 +129,7 @@ namespace ConfigFixer
                 }
 
                 _PROJECTS = projectInformations;
-                textBox1.Text = _PATH;
+                textBox1.Text = _SOLUTIONPATH;
             }
         }
 
