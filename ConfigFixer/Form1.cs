@@ -100,7 +100,6 @@ namespace ConfigFixer
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-
                 FileInfo fileInfo = new FileInfo(openFileDialog1.FileName);
                 _SOLUTIONPATH = fileInfo.DirectoryName!;
 
