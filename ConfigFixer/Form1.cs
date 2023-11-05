@@ -8,7 +8,6 @@ namespace ConfigFixer
         private string _PATH = string.Empty;
         private List<(string ProjectName, string ProjectPath)> _PROJECTS = new List<(string ProjectName, string ProjectPath)>();
         private string _FOCUSEDPROJECT = string.Empty;
-        private Dictionary<string, List<(string ConfigName, bool UseTest)>> _PROJECTSETTINGS = new Dictionary<string, List<(string ConfigName, bool UseTest)>>();
 
         public Form1()
         {
@@ -39,10 +38,6 @@ namespace ConfigFixer
 
         private void CheckedListBox2_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            var dyn = (dynamic)sender;
-            if (dyn.SelectedItem == null) return;
-            _PROJECTSETTINGS[_FOCUSEDPROJECT].Remove(new(dyn.SelectedItem, e.CurrentValue == CheckState.Checked ? true : false));
-            _PROJECTSETTINGS[_FOCUSEDPROJECT].Add(new(dyn.SelectedItem, e.NewValue == CheckState.Checked ? true : false));
         }
 
         private void ProjectList_SelectedIndexChanged(object sender, EventArgs e)
@@ -57,26 +52,6 @@ namespace ConfigFixer
             }
 
             this.textBox2.Text = _FOCUSEDPROJECT;
-
-            if (_PROJECTSETTINGS.ContainsKey(_FOCUSEDPROJECT))
-            {
-                int i = 0;
-                var overriddenSettings = new List<int>();
-                foreach (var setting in _PROJECTSETTINGS[_FOCUSEDPROJECT])
-                {
-                    checkedListBox2.Items.Add(setting.ConfigName);
-                    if (setting.UseTest)
-                    {
-                        overriddenSettings.Add(i);
-                    }
-                    i++;
-                }
-                foreach (var check in overriddenSettings)
-                {
-                    checkedListBox2.SetItemCheckState(check, CheckState.Checked);
-                }
-                return;
-            }
 
             try
             {
@@ -103,7 +78,6 @@ namespace ConfigFixer
 
                     i++;
                 }
-                _PROJECTSETTINGS.Add(_FOCUSEDPROJECT, configSetting);
             }
             catch (Exception ex)
             {
@@ -189,28 +163,18 @@ namespace ConfigFixer
 
         private void button2_Click(object sender, EventArgs e)
         {
-            _PROJECTSETTINGS.Remove(_FOCUSEDPROJECT);
-            var configSetting = new List<(string ConfigName, bool UseTest)>();
-            for (int i = 0;i < checkedListBox2.Items.Count; i++)
+            for (int i = 0; i < checkedListBox2.Items.Count; i++)
             {
-                var setting = (string)checkedListBox2.Items[i];
-                configSetting.Add((setting, true));
                 checkedListBox2.SetItemCheckState(i, CheckState.Checked);
             }
-            _PROJECTSETTINGS.Add(_FOCUSEDPROJECT, configSetting);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            _PROJECTSETTINGS.Remove(_FOCUSEDPROJECT);
-            var configSetting = new List<(string ConfigName, bool UseTest)>();
             for (int i = 0; i < checkedListBox2.Items.Count; i++)
             {
-                var setting = (string)checkedListBox2.Items[i];
-                configSetting.Add((setting, false));
                 checkedListBox2.SetItemCheckState(i, CheckState.Unchecked);
             }
-            _PROJECTSETTINGS.Add(_FOCUSEDPROJECT, configSetting);
         }
     }
 }

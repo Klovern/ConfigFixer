@@ -53,6 +53,7 @@
             ProjectList.MultiSelect = false;
             ProjectList.Name = "ProjectList";
             ProjectList.Size = new Size(284, 513);
+            ProjectList.Sorting = SortOrder.Ascending;
             ProjectList.TabIndex = 0;
             ProjectList.UseCompatibleStateImageBehavior = false;
             ProjectList.View = View.List;
@@ -96,6 +97,7 @@
             checkedListBox2.Location = new Point(515, 203);
             checkedListBox2.Name = "checkedListBox2";
             checkedListBox2.Size = new Size(222, 418);
+            checkedListBox2.Sorted = true;
             checkedListBox2.TabIndex = 6;
             checkedListBox2.ItemCheck += CheckedListBox2_ItemCheck;
             // 
