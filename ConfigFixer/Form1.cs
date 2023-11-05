@@ -78,17 +78,17 @@ namespace ConfigFixer
 
             try
             {
-                var appsettingsPath = @_PROJECTS.First(x => x.ProjectName == _FOCUSEDPROJECT).ProjectPath.Replace(_FOCUSEDPROJECT, "") + "appsettings.json";
-                var appsettingsLocalPath = @_PROJECTS.First(x => x.ProjectName == _FOCUSEDPROJECT).ProjectPath.Replace(_FOCUSEDPROJECT, "") + "appsettings.local.json";
+                var appsettingsPath = @_PROJECTS.First(p => p.ProjectName == _FOCUSEDPROJECT).ProjectPath.Replace(_FOCUSEDPROJECT, "") + "appsettings.json";
+                var appsettingsLocalPath = @_PROJECTS.First(p => p.ProjectName == _FOCUSEDPROJECT).ProjectPath.Replace(_FOCUSEDPROJECT, "") + "appsettings.local.json";
 
                 var appsettingsConfig = new ConfigurationBuilder().AddJsonFile(appsettingsPath).Build();
                 var appsettingsLocalFileExists = File.Exists(appsettingsLocalPath);
                 var appsettingsLocalConfig = appsettingsLocalFileExists ? new ConfigurationBuilder().AddJsonFile(appsettingsLocalPath).Build() : new ConfigurationBuilder().Build();
-                var appsettingsLocalConfigSettingKeys = appsettingsLocalConfig.Providers.SelectMany(x => x.GetChildKeys(new List<string>(), default)).Distinct().OrderBy(key => key);
+                var appsettingsLocalConfigSettingKeys = appsettingsLocalConfig.Providers.SelectMany(configurationProvider => configurationProvider.GetChildKeys(new List<string>(), default)).Distinct().OrderBy(key => key);
 
                 int i = 0;
                 var configSetting = new List<(string ConfigName, bool UseTest)>();
-                foreach (var settingKey in appsettingsConfig.Providers.SelectMany(x => x.GetChildKeys(new List<string>(), default)).Distinct().OrderBy(key => key))
+                foreach (var settingKey in appsettingsConfig.Providers.SelectMany(configurationProvider => configurationProvider.GetChildKeys(new List<string>(), default)).Distinct().OrderBy(key => key))
                 {
                     checkedListBox2.Items.Add(settingKey);
 
@@ -159,10 +159,10 @@ namespace ConfigFixer
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            var path = @_PROJECTS.First(x => x.ProjectName == _FOCUSEDPROJECT).ProjectPath.Replace(_FOCUSEDPROJECT, "");
+            var path = @_PROJECTS.First(p => p.ProjectName == _FOCUSEDPROJECT).ProjectPath.Replace(_FOCUSEDPROJECT, "");
             var localAppsettingsFile = @path + "appsettings.local.json";
 
-            var testsettings = File.ReadAllText("testsettings.txt");
+            var testSettingsReference = File.ReadAllText("testsettings.txt");
 
             using (StreamWriter sw = new StreamWriter(localAppsettingsFile))
             {
@@ -171,7 +171,7 @@ namespace ConfigFixer
                 for (int i = 0; i < checkedListBox2.CheckedItems.Count; i++)
                 {
                     var setting = (string)checkedListBox2.CheckedItems[i]!;
-                    var testsettingsSubstringedBeginning = testsettings.Substring(testsettings.IndexOf("@@" + setting)).Substring(setting.Length + 2);
+                    var testsettingsSubstringedBeginning = testSettingsReference.Substring(testSettingsReference.IndexOf("@@" + setting)).Substring(setting.Length + 2);
                     var testsettingsSubstringedBeginningAndEnd = testsettingsSubstringedBeginning.Substring(0, testsettingsSubstringedBeginning.IndexOf("@@@"));
 
                     sw.Write(testsettingsSubstringedBeginningAndEnd);
