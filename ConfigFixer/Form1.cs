@@ -151,7 +151,6 @@ namespace ConfigFixer
 
                 foreach (var projectInformation in projectInformations)
                 {
-                    Console.WriteLine(projectInformation.ProjectName + "\t" + projectInformation.ProjectPath);
                     this.ProjectList.Items.Add(projectInformation.ProjectName);
                 }
 
