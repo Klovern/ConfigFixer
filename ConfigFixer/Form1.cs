@@ -37,7 +37,7 @@ namespace ConfigFixer
 
         private void ProjectList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ProjectSettingCheckedList.Items.Clear();
+            this.ProjectSettingCheckedList.Items.Clear();
 
             _FOCUSEDPROJECT = ProjectList?.FocusedItem?.Text.ToString() ?? string.Empty;
 
@@ -79,7 +79,7 @@ namespace ConfigFixer
 
         private void SyncSolution_Click(object sender, EventArgs e)
         {
-            ProjectList.Items.Clear();
+            this.ProjectList.Items.Clear();
             OpenFileDialog openFileDialog1 = new OpenFileDialog
             {
                 InitialDirectory = @"C:\",
@@ -120,7 +120,7 @@ namespace ConfigFixer
                 }
 
                 _PROJECTS = projectInformations;
-                RootPathLabel.Text = _SOLUTIONPATH;
+                this.RootPathLabel.Text = _SOLUTIONPATH;
             }
         }
 
@@ -156,7 +156,7 @@ namespace ConfigFixer
         {
             for (int i = 0; i < ProjectSettingCheckedList.Items.Count; i++)
             {
-                ProjectSettingCheckedList.SetItemCheckState(i, CheckState.Checked);
+                this.ProjectSettingCheckedList.SetItemCheckState(i, CheckState.Checked);
             }
         }
 
@@ -164,7 +164,7 @@ namespace ConfigFixer
         {
             for (int i = 0; i < ProjectSettingCheckedList.Items.Count; i++)
             {
-                ProjectSettingCheckedList.SetItemCheckState(i, CheckState.Unchecked);
+                this.ProjectSettingCheckedList.SetItemCheckState(i, CheckState.Unchecked);
             }
         }
     }
